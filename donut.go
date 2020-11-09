@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	delay      = 16 * time.Millisecond
+	delay      = 16 * time.Millisecond // 60 fps hahaha
 	coreString = ".,-~:;=!*#$@"
 )
 
@@ -30,7 +30,7 @@ func floatMemset(arr []float64, v float64) {
 	}
 }
 
-func byteMemset(arr []byte, v byte) {
+func byteMemset(arr []string, v string) {
 	for i := range arr {
 		arr[i] = v
 	}
@@ -44,21 +44,21 @@ func main() {
 	var k int
 
 	z := make([]float64, 1760)
-	b := make([]byte, 1760)
+	b := make([]string, 1760)
 
 	fmt.Print("\033[H\033[2J") // clear previous stdout
 
 	for {
-		byteMemset(b, 32)
+		byteMemset(b, " ")
 		floatMemset(z, 0)
 
 		for j = 0; j < 6.28; j += 0.07 {
 			for i = 0; i < 6.28; i += 0.02 {
 				c := math.Sin(i)
-				d := math.Sin(j)
+				d := math.Cos(j)
 				e := math.Sin(A)
 				f := math.Sin(j)
-				g := math.Sin(A)
+				g := math.Cos(A)
 				h := d + 2
 				D := 1 / (c*h*e + f*g + 5)
 				l := math.Cos(i)
@@ -66,8 +66,8 @@ func main() {
 				n := math.Sin(B)
 				t := c*h*g - f*e
 
-				x := 40 + 30*D*(l*h*m-t*n)
-				y := 12 + 15*D*(l*h*n+t*m)
+				x := int(40 + 30*D*(l*h*m-t*n))
+				y := int(12 + 15*D*(l*h*n+t*m))
 
 				o := int(x + 80*y)
 
@@ -82,7 +82,7 @@ func main() {
 						point = N
 					}
 
-					b[o] = coreString[point]
+					b[o] = string(coreString[point])
 				}
 
 			}
@@ -107,4 +107,5 @@ func main() {
 		time.Sleep(delay)
 
 	}
+
 }
