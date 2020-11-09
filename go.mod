@@ -1,3 +1,3 @@
-module asscii-render
+module ascii-render
 
 go 1.14
